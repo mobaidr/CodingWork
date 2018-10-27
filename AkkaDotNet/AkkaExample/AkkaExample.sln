@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaExample", "AkkaExample\AkkaExample.csproj", "{BAB7D1E3-7446-4378-B98B-6874F89E2C12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAB7D1E3-7446-4378-B98B-6874F89E2C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB7D1E3-7446-4378-B98B-6874F89E2C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB7D1E3-7446-4378-B98B-6874F89E2C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB7D1E3-7446-4378-B98B-6874F89E2C12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD2CEC8F-5C62-47F9-A130-E0823EF19607}
+	EndGlobalSection
+EndGlobal

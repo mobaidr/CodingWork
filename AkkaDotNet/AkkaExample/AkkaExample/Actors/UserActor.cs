@@ -34,19 +34,6 @@ namespace AkkaExample.Actors
             ColorConsole.WriteCyanLine("UserActor has now become stopped");
         }
 
-        //private void HandleStopMovieMessage(StopMovieMessage msg)
-        //{
-        //    if (string.IsNullOrEmpty(_currentlyWatching))
-        //    {
-        //        ColorConsole.WriteRedLine("Error: Cannot stop if nothing is playing.");
-        //    }
-        //    else
-        //    {
-        //        StopPlayingCurrentMovie();
-        //    }
-
-        //}
-
         private void StopPlayingCurrentMovie()
         {
             ColorConsole.WriteLineYellow($"User has stopped watching {_currentlyWatching}");
@@ -56,16 +43,6 @@ namespace AkkaExample.Actors
             Become(Stopped);
         }
 
-
-        //private void HandlePlayMovieMessage(PlayMovieMessage msg)
-        //{
-        //    if (!string.IsNullOrEmpty(_currentlyWatching))
-        //        ColorConsole.WriteRedLine("Error: Cannot start playing another movie before stoppping exisitng one");
-        //    else
-        //    {
-        //        StartPlayingMovie(msg.MovieTitle);
-        //    }
-        //}
 
         private void StartPlayingMovie(string movieTitle)
         {

@@ -4,6 +4,11 @@ namespace AkkaExample
 {
     public static class ColorConsole
     {
+        public static void WriteRedLine(string message)
+        {
+            WriteLineColored(message, () => ConsoleColor.Red);
+        }
+
         public static void WriteGreenLine(string message)
         {
             WriteLineColored(message, () => ConsoleColor.Green);

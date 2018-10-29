@@ -9,6 +9,11 @@ namespace AkkaExample
             WriteLineColored(message, () => ConsoleColor.Red);
         }
 
+        public static void WriteCyanLine(string message)
+        {
+            WriteLineColored(message, () => ConsoleColor.Cyan);
+        }
+
         public static void WriteGreenLine(string message)
         {
             WriteLineColored(message, () => ConsoleColor.Green);

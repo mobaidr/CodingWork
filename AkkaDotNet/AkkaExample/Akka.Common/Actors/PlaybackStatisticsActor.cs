@@ -1,9 +1,6 @@
 ﻿using Akka.Actor;
+using Akka.Common.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Akka.Common.Actors
 {
@@ -15,6 +12,22 @@ namespace Akka.Common.Actors
             Context.ActorOf(Props.Create<MoviePlayCounterActor>(), "MoviePlayCounter");
         }
 
+        protected override SupervisorStrategy SupervisorStrategy()
+        {
+            return new OneForOneStrategy(
+                exception =>
+                {
+                    if (exception is SimulatedCorruptStateException)
+                        return Directive.Restart;
+
+                    if (exception is SimulatedTerribleMovieException)
+                        return Directive.Resume;
+
+                    return Directive.Restart;
+                }
+
+                );
+        }
 
         #region Lifecycle Hooks
         protected override void PreStart()

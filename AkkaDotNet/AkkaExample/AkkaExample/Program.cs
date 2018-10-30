@@ -28,11 +28,11 @@ namespace AkkaExample
 
             Console.ReadKey();
             Console.WriteLine("Sending a StopMovieMessage");
-            playbackActorRef.Tell(new StopMovieMessage());
+            playbackActorRef.Tell(new StopMovieMessage(58));
 
             Console.ReadKey();
             Console.WriteLine("Sending another StopMovieMessage");
-            playbackActorRef.Tell(new StopMovieMessage());
+            playbackActorRef.Tell(new StopMovieMessage(77));
 
             Console.ReadKey();
 

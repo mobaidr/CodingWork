@@ -1,22 +1,18 @@
 ﻿using Akka.Actor;
 using Akka.Common.Messages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Akka.Common.Actors
 {
     public class UserActor : ReceiveActor
     {
         private string _currentlyWatching;
+        private int UserId { get;  set; }
 
-        public UserActor()
+        public UserActor(int userId)
         {
-            Console.WriteLine("Creating UserActor");
+            UserId = userId;
 
-            ColorConsole.WriteCyanLine("Setting initial behaviour to stopped");
             Stopped();
         }
 
@@ -26,7 +22,7 @@ namespace Akka.Common.Actors
             Receive<PlayMovieMessage>(msg => ColorConsole.WriteRedLine("Error: Cannot start playing another movie before stoppping existing one"));
             Receive<StopMovieMessage>(msg => StopPlayingCurrentMovie());
 
-            ColorConsole.WriteCyanLine("UserActor has become Playing.");
+            ColorConsole.WriteLineYellow("UserActor has become Playing.");
         }
 
         private void Stopped()
@@ -35,7 +31,7 @@ namespace Akka.Common.Actors
             Receive<StopMovieMessage>(msg => ColorConsole.WriteRedLine("Error: Cannot stop if nothing is playing."));
 
 
-            ColorConsole.WriteCyanLine("UserActor has now become stopped");
+            ColorConsole.WriteLineYellow("UserActor has now become stopped");
         }
 
         private void StopPlayingCurrentMovie()
@@ -54,28 +50,30 @@ namespace Akka.Common.Actors
 
             ColorConsole.WriteLineYellow($"User is current watching {_currentlyWatching}");
 
+            Context.ActorSelection("/user/Playback/PlaybackStatistics/MoviePlayCounter").Tell(new IncrementPlayCountMessage(movieTitle));
+
             Become(Playing);
         }
 
         protected override void PreStart()
         {
-            ColorConsole.WriteGreenLine("UserActor Prestart");
+            ColorConsole.WriteLineYellow("UserActor Prestart");
         }
 
         protected override void PostStop()
         {
-            ColorConsole.WriteGreenLine("UserActor PostStop");
+            ColorConsole.WriteLineYellow($"UserActor {UserId} PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            ColorConsole.WriteGreenLine("UserActor PreRestart because : " + reason);
+            ColorConsole.WriteLineYellow("UserActor PreRestart because : " + reason);
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason)
         {
-            ColorConsole.WriteGreenLine("UserActor Post Restart because : " + reason);
+            ColorConsole.WriteLineYellow("UserActor Post Restart because : " + reason);
             base.PostRestart(reason);
         }
     }

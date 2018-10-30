@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaExample", "AkkaExample\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Common", "Akka.Common\Akka.Common.csproj", "{8EBE9877-4CD5-4A15-9302-AD9DD3A81E92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaExample.UserCoOrdinator", "AkkaExample.UserCoOrdinator\AkkaExample.UserCoOrdinator.csproj", "{F2E12153-F195-42BB-B605-52A1A57C17B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8EBE9877-4CD5-4A15-9302-AD9DD3A81E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EBE9877-4CD5-4A15-9302-AD9DD3A81E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EBE9877-4CD5-4A15-9302-AD9DD3A81E92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E12153-F195-42BB-B605-52A1A57C17B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E12153-F195-42BB-B605-52A1A57C17B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E12153-F195-42BB-B605-52A1A57C17B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E12153-F195-42BB-B605-52A1A57C17B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

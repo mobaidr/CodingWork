@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8EBE9877-4CD5-4A15-9302-AD9DD3A81E92}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Akka.Common</RootNamespace>
-    <AssemblyName>Akka.Common</AssemblyName>
+    <ProjectGuid>{F2E12153-F195-42BB-B605-52A1A57C17B5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AkkaExample.UserCoOrdinator</RootNamespace>
+    <AssemblyName>AkkaExample.UserCoOrdinator</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -51,19 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\MoviePlayCounterActor.cs" />
-    <Compile Include="Actors\PlaybackActor.cs" />
-    <Compile Include="Actors\PlaybackStatisticsActor.cs" />
-    <Compile Include="Actors\UserActor.cs" />
-    <Compile Include="Actors\UserCoordinatorActor.cs" />
-    <Compile Include="ColorConsole.cs" />
-    <Compile Include="Messages\IncrementPlayCountMessage.cs" />
-    <Compile Include="Messages\PlayMovieMessage.cs" />
-    <Compile Include="Messages\StopMovieMessage.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Akka.Common\Akka.Common.csproj">
+      <Project>{8ebe9877-4cd5-4a15-9302-ad9dd3a81e92}</Project>
+      <Name>Akka.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

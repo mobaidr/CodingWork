@@ -1,5 +1,4 @@
 ﻿using Akka.Actor;
-using Akka.Common.Messages;
 using System;
 
 namespace Akka.Common.Actors
@@ -8,14 +7,12 @@ namespace Akka.Common.Actors
     {
         public PlaybackActor()
         {
-            Receive<PlayMovieMessage>(m => PlayMovieMessageHandler(m));
+            Context.ActorOf(Props.Create<UserCoordinatorActor>(), "UserCoordinator");
+            Context.ActorOf(Props.Create<PlaybackStatisticsActor>(), "PlaybackStatistics");
+
         }
 
-        private void PlayMovieMessageHandler(PlayMovieMessage msg)
-        {
-            ColorConsole.WriteLineYellow($"PlayMovieMessage '{msg.MovieTitle}' for user {msg.UserId}");
-        }
-
+        #region Lifecycle Hooks
         protected override void PreStart()
         {
             ColorConsole.WriteGreenLine("Playback actor Prestart");
@@ -23,7 +20,7 @@ namespace Akka.Common.Actors
 
         protected override void PostStop()
         {
-            ColorConsole.WriteGreenLine("Playback Actor PostStop");
+            ColorConsole.WriteGreenLine("PlaybackActor PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
@@ -36,6 +33,7 @@ namespace Akka.Common.Actors
         {
             ColorConsole.WriteGreenLine("Playbackactor Post Restart because : " + reason);
             base.PostRestart(reason);
-        }
+        } 
+        #endregion
     }
 }

@@ -1,14 +1,14 @@
-﻿using System;
-using Akka.Actor;
-using AkkaExample.Messages;
+﻿using Akka.Actor;
+using Akka.Common.Messages;
+using System;
 
-namespace AkkaExample.Actors
+namespace Akka.Common.Actors
 {
     public class PlaybackActor : ReceiveActor
     {
         public PlaybackActor()
         {
-            Receive<PlayMovieMessage>(m=>PlayMovieMessageHandler(m));
+            Receive<PlayMovieMessage>(m => PlayMovieMessageHandler(m));
         }
 
         private void PlayMovieMessageHandler(PlayMovieMessage msg)

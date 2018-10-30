@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AkkaExample
+namespace Akka.Common
 {
     public static class ColorConsole
     {
@@ -22,7 +22,7 @@ namespace AkkaExample
         public static void WriteLineYellow(string message)
         {
             WriteLineColored(message, () => ConsoleColor.Yellow);
-            
+
         }
 
         private static void WriteLineColored(string message, Func<ConsoleColor> getColor)

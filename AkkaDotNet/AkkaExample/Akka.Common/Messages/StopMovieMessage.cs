@@ -1,4 +1,4 @@
-﻿namespace AkkaExample.Messages
+﻿namespace Akka.Common.Messages
 {
     public class StopMovieMessage
     {

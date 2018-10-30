@@ -1,8 +1,8 @@
-﻿namespace AkkaExample.Messages
+﻿namespace Akka.Common.Messages
 {
     public class PlayMovieMessage
     {
-        public PlayMovieMessage(string movieTitle,int userId)
+        public PlayMovieMessage(string movieTitle, int userId)
         {
 
             MovieTitle = movieTitle;

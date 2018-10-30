@@ -1,8 +1,12 @@
 ﻿using Akka.Actor;
-using AkkaExample.Messages;
+using Akka.Common.Messages;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AkkaExample.Actors
+namespace Akka.Common.Actors
 {
     public class UserActor : ReceiveActor
     {

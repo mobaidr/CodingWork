@@ -1,7 +1,8 @@
 ﻿using System;
 using Akka.Actor;
-using AkkaExample.Actors;
-using AkkaExample.Messages;
+using Akka.Common.Actors;
+using Akka.Common.Messages;
+using Akka.Common;
 
 namespace AkkaExample
 {

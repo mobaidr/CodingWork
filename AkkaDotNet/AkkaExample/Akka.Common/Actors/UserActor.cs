@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Akka.Common.Messages;
+using Akka.Event;
 using System;
 
 namespace Akka.Common.Actors
@@ -7,7 +8,9 @@ namespace Akka.Common.Actors
     public class UserActor : ReceiveActor
     {
         private string _currentlyWatching;
-        private int UserId { get;  set; }
+        private ILoggingAdapter _logger = Context.GetLogger();
+
+        private int UserId { get; set; }
 
         public UserActor(int userId)
         {
@@ -19,24 +22,30 @@ namespace Akka.Common.Actors
 
         private void Playing()
         {
-            Receive<PlayMovieMessage>(msg => ColorConsole.WriteRedLine("Error: Cannot start playing another movie before stoppping existing one"));
+            Receive<PlayMovieMessage>(msg =>
+            {
+                _logger.Warning($"User {UserId} cannot start playing another movie before stopping existing one");
+            });
             Receive<StopMovieMessage>(msg => StopPlayingCurrentMovie());
 
-            ColorConsole.WriteLineYellow("UserActor has become Playing.");
+            _logger.Info($"UserActor {UserId} has now become playing");
         }
 
         private void Stopped()
         {
             Receive<PlayMovieMessage>(msg => StartPlayingMovie(msg.MovieTitle));
-            Receive<StopMovieMessage>(msg => ColorConsole.WriteRedLine("Error: Cannot stop if nothing is playing."));
+            Receive<StopMovieMessage>(msg =>
+            {
+                _logger.Warning($"User {UserId} cannot stop if nothing is playing");
+            });
 
 
-            ColorConsole.WriteLineYellow("UserActor has now become stopped");
+            _logger.Info($"UserActor {UserId} has now become stopped");
         }
 
         private void StopPlayingCurrentMovie()
         {
-            ColorConsole.WriteLineYellow($"User has stopped watching {_currentlyWatching}");
+            _logger.Info($"User {UserId} has stopped watching {_currentlyWatching}");
 
             _currentlyWatching = null;
 
@@ -48,7 +57,7 @@ namespace Akka.Common.Actors
         {
             _currentlyWatching = movieTitle;
 
-            ColorConsole.WriteLineYellow($"User is current watching {_currentlyWatching}");
+            _logger.Info($"User {UserId} is current watching {_currentlyWatching}");
 
             Context.ActorSelection("/user/Playback/PlaybackStatistics/MoviePlayCounter").Tell(new IncrementPlayCountMessage(movieTitle));
 
@@ -57,23 +66,23 @@ namespace Akka.Common.Actors
 
         protected override void PreStart()
         {
-            ColorConsole.WriteLineYellow("UserActor Prestart");
+            _logger.Debug($"UserActor {UserId} Prestart");
         }
 
         protected override void PostStop()
         {
-            ColorConsole.WriteLineYellow($"UserActor {UserId} PostStop");
+            _logger.Debug($"UserActor {UserId} PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            ColorConsole.WriteLineYellow("UserActor PreRestart because : " + reason);
+            _logger.Debug($"UserActor {UserId} PreRestart because : {reason}");
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason)
         {
-            ColorConsole.WriteLineYellow("UserActor Post Restart because : " + reason);
+            _logger.Debug("UserActor Post Restart because : " + reason);
             base.PostRestart(reason);
         }
     }

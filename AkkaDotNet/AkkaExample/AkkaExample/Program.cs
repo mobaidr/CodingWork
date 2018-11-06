@@ -38,7 +38,7 @@ namespace AkkaExample
 
             MovieStreamingActorSystem.Terminate().Wait();
 
-            ColorConsole.WriteGreenLine("Actor system terminated");
+            Console.WriteLine("Actor system terminated");
 
             Console.ReadKey();
         }

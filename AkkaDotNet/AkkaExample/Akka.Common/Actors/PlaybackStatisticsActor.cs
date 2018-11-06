@@ -1,11 +1,13 @@
 ﻿using Akka.Actor;
 using Akka.Common.Exceptions;
+using Akka.Event;
 using System;
 
 namespace Akka.Common.Actors
 {
     public class PlaybackStatisticsActor : ReceiveActor
     {
+        private readonly ILoggingAdapter _logger = Context.GetLogger();
 
         public PlaybackStatisticsActor()
         {
@@ -18,10 +20,20 @@ namespace Akka.Common.Actors
                 exception =>
                 {
                     if (exception is SimulatedCorruptStateException)
+                    {
+                        _logger.Error(exception, "PlaybackStatisticsActor supervisory stratergy restarting child due to SimulatedCorruptStateException");
+
                         return Directive.Restart;
+                    }
 
                     if (exception is SimulatedTerribleMovieException)
+                    {
+                        _logger.Warning("PlaybackStatisticsActor supervisory stratergy resume child due to SimulatedTerribleMovieException");
+
                         return Directive.Resume;
+                    }
+
+                    _logger.Error(exception, "PlaybackStatisticsActor supervisory stratergy restarting child due to unexpected exception");
 
                     return Directive.Restart;
                 }
@@ -32,23 +44,23 @@ namespace Akka.Common.Actors
         #region Lifecycle Hooks
         protected override void PreStart()
         {
-            ColorConsole.WriteLineWhite("PlaybackStatisticsActor Prestart");
+            _logger.Debug($"UserActor Prestart");
         }
 
         protected override void PostStop()
         {
-            ColorConsole.WriteLineWhite("PlaybackStatisticsActor PostStop");
+            _logger.Debug($"UserActor PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            ColorConsole.WriteLineWhite("PlaybackStatisticsActor PreRestart because : " + reason);
+            _logger.Debug("PlaybackStatisticsActor PreRestart because : " + reason);
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason)
         {
-            ColorConsole.WriteLineWhite("PlaybackStatisticsActor Post Restart because : " + reason);
+            _logger.Debug("PlaybackStatisticsActor Post Restart because : " + reason);
             base.PostRestart(reason);
         }
         #endregion

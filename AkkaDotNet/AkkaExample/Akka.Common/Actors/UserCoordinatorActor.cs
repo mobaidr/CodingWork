@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Akka.Common.Messages;
+using Akka.Event;
 using System;
 using System.Collections.Generic;
 
@@ -8,6 +9,7 @@ namespace Akka.Common.Actors
     public class UserCoordinatorActor : ReceiveActor
     {
         private readonly Dictionary<int, IActorRef> _users;
+        private readonly ILoggingAdapter _logger = Context.GetLogger();
 
         public UserCoordinatorActor()
         {
@@ -42,30 +44,30 @@ namespace Akka.Common.Actors
 
                 _users.Add(userId, newchildActorRef);
 
-                ColorConsole.WriteCyanLine($"UserCoordinatorActor created new child  UserActor for {userId} (Total Users : {_users.Count})");
+                _logger.Info($"UserCoordinatorActor created new child  UserActor for {userId} (Total Users : {_users.Count})");
             }
         }
 
         #region Lifecycle Hooks
         protected override void PreStart()
         {
-            ColorConsole.WriteGreenLine("UserCoordinatorActor Prestart");
+            _logger.Debug("UserCoordinatorActor Prestart");
         }
 
         protected override void PostStop()
         {
-            ColorConsole.WriteGreenLine("UserCoordinatorActor PostStop");
+            _logger.Debug("UserCoordinatorActor PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            ColorConsole.WriteGreenLine("UserCoordinatorActor PreRestart because : " + reason);
+            _logger.Debug("UserCoordinatorActor PreRestart because : " + reason);
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason)
         {
-            ColorConsole.WriteGreenLine("UserCoordinatorActor Post Restart because : " + reason);
+            _logger.Debug("UserCoordinatorActor Post Restart because : " + reason);
             base.PostRestart(reason);
         }
         #endregion

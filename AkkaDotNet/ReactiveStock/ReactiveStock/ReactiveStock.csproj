@@ -74,6 +74,8 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Globalization" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -96,6 +98,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActorModel\ActorSystemReference.cs" />
+    <Compile Include="ActorModel\Actors\StockActor.cs" />
+    <Compile Include="ActorModel\Actors\StockCoordinatorActor.cs" />
+    <Compile Include="ActorModel\Actors\StockPriceLookupActor.cs" />
+    <Compile Include="ActorModel\Messages\AddChartSeriesMessage.cs" />
+    <Compile Include="ActorModel\Messages\RefreshStockPriceMessage.cs" />
+    <Compile Include="ActorModel\Messages\RemoveChartSeriesMessage.cs" />
+    <Compile Include="ActorModel\Messages\StockPriceMessage.cs" />
+    <Compile Include="ActorModel\Messages\SubscribeToNewStockPricesMessage.cs" />
+    <Compile Include="ActorModel\Messages\UnSubscribeFromNewStockPricesMessage.cs" />
+    <Compile Include="ActorModel\Messages\UnWatchStockMessage.cs" />
+    <Compile Include="ActorModel\Messages\UpdatedStockPriceMessage.cs" />
+    <Compile Include="ActorModel\Messages\WatchStockMessage.cs" />
+    <Compile Include="ExternalServices\IStockPriceServiceGateway.cs" />
+    <Compile Include="ExternalServices\RandomStockPriceServiceGateway.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -140,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActorModel\Actors\UI\" />
-    <Folder Include="ActorModel\Messages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

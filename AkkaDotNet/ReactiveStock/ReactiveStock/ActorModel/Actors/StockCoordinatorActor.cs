@@ -12,6 +12,7 @@ namespace ReactiveStock.ActorModel.Actors
         public StockCoordinatorActor(IActorRef chartingActor)
         {
             _chartingActor = chartingActor;
+
             _stockActors = new Dictionary<string, IActorRef>();
 
             Receive<WatchStockMessage>(msg => WatchStockMessage(msg));
